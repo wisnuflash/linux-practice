@@ -7,23 +7,17 @@ if [ "$EUID" -ne 0 ]
 fi
 sudo apt install libapache2-mod-security2 -y
 sudo a2enmod headers
+sudo a2enmod security2
 sudo systemctl restart apache2
 sudo cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
-sudo rm -rf /usr/share/modsecurity-crs
-sudo apt install git -y 
-sudo git clone https://github.com/coreruleset/coreruleset /usr/share/modsecurity-crs
-sudo mv /usr/share/modsecurity-crs/crs-setup.conf.example /usr/share/modsecurity-crs/crs-setup.conf
-sudo mv /usr/share/modsecurity-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example /usr/share/modsecurity-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf
-
-echo "tambah config security"
-additional_text="
-# Contoh teks tambahan
-# Baris pertama yang ingin ditambahkan
-# Baris kedua yang ingin ditambahkan
-"
-
-# Menambahkan teks ke dalam file
-sudo sed -i '/# END modsecurity.conf/,/^$/d' /etc/apache2/mods-available/security2.conf
-sudo sed -i '/<IfModule security2_module>/a\'"$additional_text" /etc/apache2/mods-available/security2.conf
-
-echo "Teks telah ditambahkan ke dalam file /etc/apache2/mods-available/security2.conf."
+wget https://github.com/coreruleset/coreruleset/archive/refs/tags/v3.3.0.tar.gz
+sudo mkdir /etc/crs3
+sudo tar -xzvf v3.3.0.tar.gz --strip-components 1 -C /etc/crs3
+sudo cp /etc/crs3/crs-setup.conf.example /etc/crs3/crs-setup.conf
+sudo mv /etc/crs3/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example /etc/crs3/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf
+sudo mv /etc/crs3/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf.example /etc/crs3/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf
+echo 'IncludeOptional /etc/crs3/crs-setup.conf' >> /etc/apache2/mods-enabled/security2.conf
+echo 'IncludeOptional /etc/crs3/plugins/*-config.conf' >> /etc/apache2/mods-enabled/security2.conf
+echo 'IncludeOptional /etc/crs3/plugins/*-before.conf' >> /etc/apache2/mods-enabled/security2.conf
+echo 'IncludeOptional /etc/crs3/rules/*.conf' >> /etc/apache2/mods-enabled/security2.conf
+echo 'IncludeOptional /etc/crs3/plugins/*-after.conf' >> /etc/apache2/mods-enabled/security2.conf
