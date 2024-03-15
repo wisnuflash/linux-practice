@@ -16,7 +16,7 @@ sudo apt install -y \
 wget https://github.com/owasp-modsecurity/ModSecurity/releases/download/v2.9.6/modsecurity-2.9.6.tar.gz \
 wget https://github.com/owasp-modsecurity/ModSecurity/releases/download/v2.9.6/modsecurity-2.9.6.tar.gz.sha256 \
 sha256sum -c modsecurity-2.9.6.tar.gz.sha256 \
-tar -xvzf modsecurity-2.9.6.tar.gz \
+tar -xvzf modsecurity-2.9.6.tar.gz 
 
 INSTALL MOD SECURITY 
 
@@ -28,7 +28,7 @@ sudo make install  \
 sudo cp /usr/local/modsecurity/lib/mod_security2.so /usr/lib/apache2/modules/  \
 sudo cp /usr/local/modsecurity/unicode.mapping /etc/apache2/ \
 sudo a2enmod security2  \
-sudo a2enmod header \
+sudo a2enmod header 
 
 ## DOWNLOAD OWASP 
 
@@ -44,7 +44,7 @@ gpg --verify coreruleset-4.0.0.tar.gz.asc v4.0.0.tar.gz \
 mkdir /etc/crs4  \
 tar -xzvf v4.0.0.tar.gz --strip-components 1 -C /etc/crs4  \
 cd /etc/crs4 \
-mv crs-setup.conf.example crs-setup.conf \
+mv crs-setup.conf.example crs-setup.conf 
 
 #edit file /etc/apache2/mods-enabled/security2.conf
 
@@ -55,7 +55,7 @@ IncludeOptional /etc/crs4/plugins/*-config.conf  \
 IncludeOptional /etc/crs4/plugins/*-before.conf  \
 IncludeOptional /etc/crs4/rules/*.conf \
 IncludeOptional /etc/crs4/plugins/*-after.conf  \
-sudo systemctl restart apache2  \\
+sudo systemctl restart apache2  
 
 Memverifikasi bahwa CRS aktif
 
