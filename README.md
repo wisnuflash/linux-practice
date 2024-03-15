@@ -13,23 +13,15 @@ sudo apt install -y \
     pkg-config \
     zlib1g-dev
     
-wget https://github.com/owasp-modsecurity/ModSecurity/releases/download/v2.9.6/modsecurity-2.9.6.tar.gz
-
-wget https://github.com/owasp-modsecurity/ModSecurity/releases/download/v2.9.6/modsecurity-2.9.6.tar.gz.sha256
-sha256sum -c modsecurity-2.9.6.tar.gz.sha256
-
-tar -xvzf modsecurity-2.9.6.tar.gz
-
-cd modsecurity-2.9.6
-
-
-./autogen.sh 
-
-./configure
-
-make
-
-sudo make install
+wget https://github.com/owasp-modsecurity/ModSecurity/releases/download/v2.9.6/modsecurity-2.9.6.tar.gz \
+wget https://github.com/owasp-modsecurity/ModSecurity/releases/download/v2.9.6/modsecurity-2.9.6.tar.gz.sha256 \
+sha256sum -c modsecurity-2.9.6.tar.gz.sha256 \
+tar -xvzf modsecurity-2.9.6.tar.gz \
+cd modsecurity-2.9.6 \
+./autogen.sh  \
+./configure \
+make \
+sudo make install \
 
 sudo cp /usr/local/modsecurity/lib/mod_security2.so /usr/lib/apache2/modules/
 
