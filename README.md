@@ -54,7 +54,10 @@ IncludeOptional /etc/crs4/crs-setup.conf  \
 IncludeOptional /etc/crs4/plugins/*-config.conf  \
 IncludeOptional /etc/crs4/plugins/*-before.conf  \
 IncludeOptional /etc/crs4/rules/*.conf \
-IncludeOptional /etc/crs4/plugins/*-after.conf  \
+IncludeOptional /etc/crs4/plugins/*-after.conf  
+
+SETELAH ITU RESTART APACHE2 
+
 sudo systemctl restart apache2  
 
 Memverifikasi bahwa CRS aktif
