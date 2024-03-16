@@ -2,7 +2,7 @@ Cara install modsecurity versi 2.9.6 di ubuntu 22.04
 
 sudo apt update
 
-sudo apt install -y  apache2-dev build-essential libcurl4-openssl-dev libgeoip-dev libpcre++-dev libxml2-dev libyajl-dev pkg-config zlib1g-dev    
+apt-get install apache2-dev libxml2-dev liblua5.1-0-dev libcurl4-gnutls-dev libyajl-dev make curl 
     
 wget https://github.com/owasp-modsecurity/ModSecurity/releases/download/v2.9.6/modsecurity-2.9.6.tar.gz \
 wget https://github.com/owasp-modsecurity/ModSecurity/releases/download/v2.9.6/modsecurity-2.9.6.tar.gz.sha256 \
