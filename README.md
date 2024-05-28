@@ -13,6 +13,8 @@ INSTALL MOD SECURITY
 
 cd modsecurity-2.9.6 \
 ./autogen.sh  \
+sudo apt-get update \
+sudo apt-get install libpcre3 libpcre3-dev \
 ./configure \
 make \
 sudo make install  \
