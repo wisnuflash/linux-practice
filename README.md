@@ -22,6 +22,26 @@ sudo cp /usr/local/modsecurity/lib/mod_security2.so /usr/lib/apache2/modules/  \
 sudo cp /usr/local/modsecurity/unicode.mapping /etc/apache2/ \
 sudo a2enmod security2  \
 sudo a2enmod header 
+sudo nano /etc/modsecurity/modsecurity.conf \
+Find the following line.
+
+SecRuleEngine DetectionOnly
+
+This config tells ModSecurity to log HTTP transactions, but takes no action when an attack is detected. Change it to the following, so ModSecurity will detect and block web attacks.
+
+SecRuleEngine On
+
+Then find the following line (line 186), which tells ModSecurity what information should be included in the audit log.
+
+SecAuditLogParts ABDEFHIJZ
+
+However, the default setting is wrong. You will know why later when I explain how to understand ModSecurity logs. The setting should be changed to the following.
+
+SecAuditLogParts ABCEFHJKZ
+
+Save and close the file. Then restart Apache for the change to take effect. (Reloding the web server isn’t enough.)
+
+sudo systemctl restart apache2
 
 ## DOWNLOAD OWASP 
 
