@@ -1,0 +1,5 @@
+### update apache 2.4.58 ###
+sudo add-apt-repository ppa:ondrej/apache2
+sudo apt-get update 
+sudo apt-get upgrade apache2
+
