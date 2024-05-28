@@ -39,7 +39,7 @@ However, the default setting is wrong. You will know why later when I explain ho
 
 SecAuditLogParts ABCEFHJKZ
 
-Save and close the file. Then restart Apache for the change to take effect. (Reloding the web server isn’t enough.)
+Save and close the file. Then restart Apache for the change to take effect. (Reloding the web server isn’t enough.) \
 SecRequestBodyLimit 536870912 \
 SecRequestBodyNoFilesLimit 10485760 \
 
