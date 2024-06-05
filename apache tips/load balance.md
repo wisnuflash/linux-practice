@@ -1,12 +1,12 @@
 # load balance nginx
 ### install nginx terlebih dahulu
-```console
+```java
 sudo apt update
 sudo apt install nginx
 ```
 
 ### tambahkan text ini di /etc/nginx/nginx.conf
-```console
+```java
 upstream backend {
         server backend1.example.com;
         server backend2.example.com;
@@ -16,7 +16,7 @@ upstream backend {
     }
 ```
 ### buat file di /etc/nginx/conf.d/yourdomain.conf 
-```console
+```java
 server {
     listen 80;
     server_name test.jossproject.site;
@@ -47,7 +47,7 @@ server {
 }
 ```
 ### hapus lah file default di /etc/nginx/sites-available dan sites-enabled
-```console
+```java
 sudo rm /etc/nginx/sites-available/default
 sudo rm /etc/nginx/sites-available/default
 ```
