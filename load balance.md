@@ -1,8 +1,12 @@
-### load balance nginx ##
+# load balance nginx
+### install nginx terlebih dahulu
+```console
 sudo apt update
 sudo apt install nginx
+```
 
-### tambahkan text ini di /etc/nginx/nginx.conf ###
+### tambahkan text ini di /etc/nginx/nginx.conf
+```console
 upstream backend {
         server backend1.example.com;
         server backend2.example.com;
@@ -10,7 +14,9 @@ upstream backend {
         # Optional: enable health checks
         # health_check;
     }
-### buat file di /etc/nginx/conf.d/yourdomain.conf ### 
+```
+### buat file di /etc/nginx/conf.d/yourdomain.conf 
+```console
 server {
     listen 80;
     server_name test.jossproject.site;
@@ -39,7 +45,14 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 }
-### hapus lah file default di /etc/nginx/sites-available dan sites-enabled ###
+```
+### hapus lah file default di /etc/nginx/sites-available dan sites-enabled
+```console
+sudo rm /etc/nginx/sites-available/default
+sudo rm /etc/nginx/sites-available/default
+```
 ### test config nginx ##
+```java
 sudo nginx -t 
 sudo systemctl restart nginx 
+```
