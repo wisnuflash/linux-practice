@@ -1,6 +1,6 @@
-# FIX GONE AWAY  MYSQL 
-
-## MENAIKAN 
+# MYSQL TIPS
+## FIX GONE AWAY  MYSQL 
+### MENAIKAN 
 : max_allowed_packet =512M \
 : wait_timeout= 1000 \
 : interaktive_timeout =1000   \
