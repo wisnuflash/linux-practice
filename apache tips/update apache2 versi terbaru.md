@@ -14,7 +14,7 @@ sudo a2enmod headers
 <Directory /var/www/html>
 	Options -Indexes
 	AllowOverride All
-  ServerSignature Off
+  	ServerSignature Off
 	Require all granted
 </Directory>
 ```
