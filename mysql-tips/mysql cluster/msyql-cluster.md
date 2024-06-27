@@ -71,7 +71,7 @@ ssl-key=server-key.pem
 ssl-ca=ca.pem
 ssl-cert=server-cert.pem
 ```
-copy server-key.pem,ca.pem,server-cert.pem from node1 to node2 and node3
+copy server-key.pem, ca.pem, server-cert.pem from node1 to node2 and node3
 # Add nodes to cluster
 Instead of changing the configuration, start the first node using the following command:
 ```python
