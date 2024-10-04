@@ -24,3 +24,6 @@ mysql> set session sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ER
 
 ### fix integer disallow null value  for fbt 
       sql_mode = "ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+### increase speed      
+	innodb_thread_concurrency	diatur sesuai jumlah core cpu rekomendasi sekitar 50 - 60 % dri total core cpu
+	thread_cache_size	ini untuk menghandling koneksi baru diatur kelipatan2 sampai 4 dari nilai default 18 menjadi 36 
