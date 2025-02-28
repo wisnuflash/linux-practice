@@ -21,12 +21,12 @@ sudo apt install -y apache2 openssl wget \
   "$PHP_VERSION"-imagick "$PHP_VERSION"-common "$PHP_VERSION"-curl \
   "$PHP_VERSION"-gd "$PHP_VERSION"-imap "$PHP_VERSION"-intl "$PHP_VERSION"-json \
   "$PHP_VERSION"-mbstring "$PHP_VERSION"-gmp "$PHP_VERSION"-bcmath "$PHP_VERSION"-mysql \
-  "$PHP_VERSION"-ssh2 "$PHP_VERSION"-xml "$PHP_VERSION"-zip "$PHP_VERSION"-apcu \
+  "$PHP_VERSION"-xml "$PHP_VERSION"-zip \
   "$PHP_VERSION"-dev php-phpseclib
 
 # Konfigurasi VirtualHost Apache
 FILE="/etc/apache2/sites-available/default.conf"
-cat <<EOM >"$FILE"
+cat <<EOM | sudo tee "$FILE"
 <VirtualHost *:80>
   ServerName $DOMAIN_NAME
   DirectoryIndex index.php index.html
@@ -50,3 +50,38 @@ sudo a2enmod rewrite headers
 
 # Restart Apache
 sudo systemctl restart apache2
+sudo systemctl enable apache2
+
+# Konfirmasi instalasi nfs-common
+read -p "Apakah Anda ingin menginstall nfs-common? (y/n): " INSTALL_NFS
+if [[ "$INSTALL_NFS" == "y" || "$INSTALL_NFS" == "Y" ]]; then
+    sudo apt install -y nfs-common
+    echo "nfs-common berhasil diinstal."
+else
+    echo "Instalasi nfs-common dibatalkan. Keluar dari skrip."
+    exit 0
+fi
+
+# Meminta informasi NFS
+read -p "Masukkan IP server NFS: " IP_NFS
+read -p "Masukkan directory NFS (contoh: /files/files): " DIR_NFS
+read -p "Masukkan directory target untuk di-mount (contoh: /mnt/nfs): " TARGET_NFS
+
+# Pastikan directory target ada, jika tidak buat directory tersebut
+if [ ! -d "$TARGET_NFS" ]; then
+    echo "Direktori $TARGET_NFS tidak ditemukan, membuatnya..."
+    sudo mkdir -p "$TARGET_NFS"
+fi
+
+# Mount sementara
+sudo mount "$IP_NFS:$DIR_NFS" "$TARGET_NFS"
+
+# Konfirmasi apakah ingin mount permanen
+read -p "Apakah Anda ingin mount secara permanen? (y/n): " MOUNT_NFS
+if [[ "$MOUNT_NFS" == "y" || "$MOUNT_NFS" == "Y" ]]; then
+    echo "$IP_NFS:$DIR_NFS $TARGET_NFS nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0" | sudo tee -a /etc/fstab
+    echo "Mount berhasil ditambahkan ke /etc/fstab."
+else
+    echo "Mount permanen dibatalkan. Keluar dari skrip."
+    exit 0
+fi
