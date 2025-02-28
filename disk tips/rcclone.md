@@ -6,3 +6,4 @@ rclone mount trusmicorp-bucket:trusmicorp-bucket /mnt/test-rc --allow-non-empty 
 fusermount -u ~/directory
 ```
 
+rclone mount aws:dbdell /mnt/aws-test --daemon
