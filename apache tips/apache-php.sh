@@ -22,13 +22,14 @@ sudo apt install -y apache2 openssl wget \
   "$PHP_VERSION"-gd "$PHP_VERSION"-imap "$PHP_VERSION"-intl "$PHP_VERSION"-json \
   "$PHP_VERSION"-mbstring "$PHP_VERSION"-gmp "$PHP_VERSION"-bcmath "$PHP_VERSION"-mysql \
   "$PHP_VERSION"-xml "$PHP_VERSION"-zip \
-  "$PHP_VERSION"-dev php-phpseclib
+  "$PHP_VERSION"-dev php-phpseclib "$PHP_VERSION"-iconv
+  
 
 # Konfigurasi VirtualHost Apache
 FILE="/etc/apache2/sites-available/default.conf"
 cat <<EOM | sudo tee "$FILE"
 <VirtualHost *:80>
-  ServerName $DOMAIN_NAME
+  #ServerName $DOMAIN_NAME
   DirectoryIndex index.php index.html
   DocumentRoot /var/www/html
 
@@ -39,7 +40,10 @@ cat <<EOM | sudo tee "$FILE"
 
     SetEnv HOME /var/www/html
     SetEnv HTTP_HOME /var/www/html
-  </Directory>
+  </Directory
+  
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined  
 </VirtualHost>
 EOM
 
