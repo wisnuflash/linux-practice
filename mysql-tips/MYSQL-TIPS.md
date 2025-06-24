@@ -285,7 +285,7 @@ SELECT
         FROM performance_schema.global_variables 
         WHERE VARIABLE_NAME = 'innodb_buffer_pool_size'
     ) * 0.9 < (
-        SELECT database_pages * @@innodb_page_size 
+        SELECT SUM(database_pages * @@innodb_page_size) 
         FROM information_schema.innodb_buffer_pool_stats
     ) THEN 'MEMORY_PRESSURE_ALERT' ELSE 'MEMORY_OK' END as memory_status;
 ```
