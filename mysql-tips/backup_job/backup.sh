@@ -46,7 +46,7 @@ backup_database() {
     fi
   done
 
-  curl -X POST https://send.trustcore.id/api/send-media-group \
+  curl -X POST http://localhost/api/send-media-group \
    -H "Content-Type: multipart/form-data" \
    -F "groupId=120363421263725908@g.us" \
    -F "message=✅ [$(date '+%F %T')] ✔️ Selesai backup untuk job: $JOB_NAME" \
