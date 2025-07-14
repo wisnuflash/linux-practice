@@ -63,11 +63,6 @@ for JOB in "${JOBS[@]}"; do
 done
 
 # === Kirim Notifikasi via Trustcore (jika diperlukan) ===
-#curl -X POST https://send.trustcore.id/api/send-media-group \
-#  -H "Content-Type: multipart/form-data" \
-#  -F "groupId=120363421263725908@g.us" \
-#  -F "message=✅ Semua backup selesai per $DATE. Cek log di $LOG_FILE" \
-#  -F "file=@$LOG_FILE" \
-#  >> "$LOG_FILE"
+
 
 echo "[$(date '+%F %T')] ✅ Backuo Job Selesai"
