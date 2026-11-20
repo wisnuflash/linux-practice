@@ -8,6 +8,7 @@ Dokumentasi ini menjelaskan langkah-langkah untuk mendeteksi dan mengaktifkan *n
 * Akses ke konsol VM atau sesi SSH dengan hak akses `sudo`.
 * *Network interface* baru sudah ditambahkan melalui pengaturan *hypervisor* (Proxmox, OpenStack, VMware, dll.).
 * Konfigurasi IP untuk *interface* baru sudah diperbarui pada pengaturan *cloud-init*.
+* regenerate image *cloud-init*.
 
 ---
 
@@ -27,6 +28,7 @@ Hapus *cache* status eksekusi *cloud-init* sebelumnya agar sistem menarik ulang 
 ```bash
 sudo cloud-init clean --logs
 sudo cloud-init init --local
+sudo cloud-init init
 ```
 
 **Verifikasi File Konfigurasi Netplan:**
